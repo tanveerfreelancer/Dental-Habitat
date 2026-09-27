@@ -1,0 +1,28 @@
+{
+  "_readme": "One entry per image slot. Put the ORIGINAL, untouched photo in src/assets/originals/ using the 'source' filename, then run: npm run images. Nothing is generated for a slot until its source file exists. 'ratio' is width/height of the crop. 'focal' is the point (0 to 1, left/top) the crop is centred on. 'zoom' (optional, default 1) crops tighter than the largest possible crop; it never enlarges, the output is always cut from real pixels.",
+  "hero": {
+    "source": "clinic-interior.jpg",
+    "ratio": 0.8,
+    "focal": [0.18, 0.5],
+    "widths": [320, 480, 640, 800, 960, 1200]
+  },
+  "about": {
+    "source": "clinic-interior.jpg",
+    "ratio": 0.8,
+    "focal": [0.452, 0.5],
+    "widths": [320, 480, 640, 800, 960, 1200]
+  },
+  "visit": {
+    "source": "clinic-exterior.jpg",
+    "ratio": 1.3333,
+    "zoom": 1.6,
+    "focal": [0.388, 0.44],
+    "widths": [320, 480, 640, 800, 960]
+  },
+  "og": {
+    "source": "clinic-interior.jpg",
+    "size": [1200, 630],
+    "focal": [0.28, 0.5],
+    "ogOnly": true
+  }
+}

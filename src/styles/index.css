@@ -1,0 +1,92 @@
+@import "./fonts.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: var(--header-h);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
+  body {
+    @apply bg-white font-sans text-body text-slate-700 antialiased;
+  }
+
+  h1, h2, h3, h4 { @apply font-heading text-slate-900 text-balance; }
+  h1 { @apply text-h1; }
+  h2 { @apply text-h2; }
+  h3 { @apply text-h3; }
+  h4 { @apply text-h4; }
+  p { text-wrap: pretty; }
+
+  /* Date inputs have an inner calendar button that is its own Tab stop; the input itself loses :focus there,
+     so the button needs its own visible ring. */
+  input[type='date']::-webkit-calendar-picker-indicator { cursor: pointer; border-radius: 4px; }
+  input[type='date']::-webkit-calendar-picker-indicator:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  ::selection { background: theme('colors.aqua.200'); color: theme('colors.brand.950'); }
+  ::placeholder { color: theme('colors.slate.500'); opacity: 1; }
+
+  /* Keyboard focus: one consistent ring everywhere. Dark surfaces swap the colour (see .surface-inverse). */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important; /* without this, staggered entrances would still wait before appearing */
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------ components */
+@layer components {
+  /* Page container: 1200px of content, gutters step with the breakpoints. */
+  .container-site {
+    width: 100%;
+    max-width: calc(var(--content-max) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Anything a section link can scroll to clears the sticky header. */
+  .scroll-target { scroll-margin-top: var(--header-h); }
+
+  /* Dark surfaces: focus ring and small accents flip to aqua. */
+  .surface-inverse { --focus: theme('colors.aqua.300'); color: theme('colors.slate.300'); }
+  .surface-inverse :is(h1, h2, h3, h4) { @apply text-white; }
+
+  /* A short label above a heading. Use only when it carries information. */
+  .eyebrow { @apply text-small font-semibold text-aqua-700; }
+  .surface-inverse .eyebrow { @apply text-aqua-300; }
+
+  /* Hero eyebrow: uppercase by brief. Small, tracked, aqua. */
+  .eyebrow-caps {
+    @apply inline-flex flex-wrap items-center gap-x-3 gap-y-1 text-caption font-semibold uppercase text-aqua-700;
+    letter-spacing: 0.12em;
+  }
+
+  /* The bullet between the two eyebrow phrases only shows when they fit on one line; when the
+     eyebrow wraps (narrow phones, tablet columns) the two phrases simply stack. */
+  .eyebrow-wrap { container-type: inline-size; }
+  .eyebrow-dot { display: none; }
+  @container (min-width: 27rem) { .eyebrow-dot { display: block; } }
+
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-md bg-brand-800 px-4 py-3 text-button text-white transition-transform;
+  }
+  .skip-link:focus-visible { @apply translate-y-0; }
+}

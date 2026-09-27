@@ -1,0 +1,32 @@
+{
+  "name": "dental-habitat",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website for Dental Habitat, a dental clinic in Garden Town, Lahore. Static site: React, Vite, Tailwind CSS; pre-rendered at build time.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build:styleguide": "vite build --mode styleguide",
+    "preview": "vite preview",
+    "images": "node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/optimize-images.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^1.47.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.28",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.3.0"
+  }
+}
